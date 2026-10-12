@@ -21,11 +21,12 @@ flower stays in place. Fabric API is **not** required.
 | Mod Enabled | Yes | **No** switches the whole mod off, and bone meal works exactly like vanilla |
 | Flowering Azalea Drops Copy | Yes | **No** = vanilla (grows an azalea tree) |
 | Mangrove Propagule Drops Copy | No | **No** = vanilla (grows the propagule a stage) |
-| Pink Petals & Wildflowers Drop Copy | Yes | **No** = vanilla (adds a petal / spreads) |
+| Pink Petals & Wildflowers Drop Copy | No | **No** = vanilla (adds a petal / spreads) |
+| Wither Rose Drops Copy | Yes | **No** = vanilla (bone meal does nothing to wither roses) |
 
 **With [Mod Menu](https://modrinth.com/mod/modmenu)** (optional): go to Mods → Flower Bone Meal
 Duplication → Configure. Each setting has its name on the left and a Yes/No button on the right.
-Click to flip it, and hover for a description. While Mod Enabled is No, the other three are greyed
+Click to flip it, and hover for a description. While Mod Enabled is No, the other settings are greyed
 out. Changes apply immediately.
 
 **Without Mod Menu** (or on a dedicated server), edit `.minecraft/config/flowerbonemeal.json`
@@ -36,7 +37,8 @@ out. Changes apply immediately.
   "modEnabled": true,
   "floweringAzaleaDropsCopy": true,
   "mangrovePropaguleDropsCopy": false,
-  "pinkPetalsAndWildflowersDropCopy": true
+  "pinkPetalsAndWildflowersDropCopy": false,
+  "witherRoseDropsCopy": true
 }
 ```
 
@@ -69,7 +71,7 @@ Requires **JDK 25**.
 ./gradlew build          # Windows: gradlew.bat build
 ```
 
-The jar is written to `build/libs/flower-bonemeal-duplication-3.1.0.jar` (ignore any `-sources`
+The jar is written to `build/libs/flower-bonemeal-duplication-3.2.0.jar` (ignore any `-sources`
 jar). Put it in `.minecraft/mods` with Fabric Loader 0.19.5+. Mod Menu is optional.
 
 No JDK? Push this folder to a GitHub repository. The included workflow

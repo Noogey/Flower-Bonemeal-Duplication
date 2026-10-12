@@ -27,7 +27,10 @@ public final class FlowerBoneMealConfig {
     public boolean mangrovePropaguleDropsCopy = false;
 
     /** Pink petals and wildflowers (and modded flowers that add petals when bone-mealed). */
-    public boolean pinkPetalsAndWildflowersDropCopy = true;
+    public boolean pinkPetalsAndWildflowersDropCopy = false;
+
+    /** Wither rose. false = bone meal does nothing to it (vanilla). */
+    public boolean witherRoseDropsCopy = true;
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Path FILE = FabricLoader.getInstance().getConfigDir().resolve(FlowerBoneMeal.MOD_ID + ".json");

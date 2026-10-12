@@ -59,13 +59,15 @@ public class FlowerBoneMealConfigScreen extends Screen {
                 },
                 false);
 
-        // Rows 2-4: the per-flower toggles.
+        // Rows 2-5: the per-flower toggles.
         addRow("flowering_azalea", toggleX, 1,
                 () -> config.floweringAzaleaDropsCopy, value -> config.floweringAzaleaDropsCopy = value, true);
         addRow("mangrove_propagule", toggleX, 2,
                 () -> config.mangrovePropaguleDropsCopy, value -> config.mangrovePropaguleDropsCopy = value, true);
         addRow("pink_petals_wildflowers", toggleX, 3,
                 () -> config.pinkPetalsAndWildflowersDropCopy, value -> config.pinkPetalsAndWildflowersDropCopy = value, true);
+        addRow("wither_rose", toggleX, 4,
+                () -> config.witherRoseDropsCopy, value -> config.witherRoseDropsCopy = value, true);
 
         updateFeatureButtons();
 

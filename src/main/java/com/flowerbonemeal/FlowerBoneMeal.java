@@ -5,6 +5,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.AzaleaBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerBedBlock;
 import net.minecraft.world.level.block.MangrovePropaguleBlock;
 import net.minecraft.world.level.block.SaplingBlock;
@@ -54,6 +55,7 @@ public final class FlowerBoneMeal {
         FlowerBoneMealConfig config = FlowerBoneMealConfig.get();
         if (!config.modEnabled) return false; // mod switched off: vanilla behaviour everywhere
         if (!state.is(DUPLICATES_WITH_BONE_MEAL) || state.is(KEEPS_VANILLA_BONE_MEAL)) return false;
+        if (state.is(Blocks.WITHER_ROSE)) return config.witherRoseDropsCopy; // false: vanilla = no interaction
         return switch (groupOf(state)) {
             case FLOWERING_AZALEA -> config.floweringAzaleaDropsCopy;
             case MANGROVE_PROPAGULE -> config.mangrovePropaguleDropsCopy;

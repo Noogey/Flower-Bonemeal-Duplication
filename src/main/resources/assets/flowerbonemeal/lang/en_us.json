@@ -10,5 +10,7 @@
   "flowerbonemeal.option.mangrove_propagule.tooltip": "Yes: bone meal on a mangrove propagule drops a copy.\nNo: vanilla behaviour (grows it a stage).\nAlso applies to modded flowers that grow in stages like it.",
   "flowerbonemeal.option.pink_petals_wildflowers": "Pink Petals & Wildflowers Drop Copy",
   "flowerbonemeal.option.pink_petals_wildflowers.tooltip": "Yes: bone meal on pink petals or wildflowers drops a copy.\nNo: vanilla behaviour (adds a petal or spreads).\nAlso applies to modded petal flowers like them.",
+  "flowerbonemeal.option.wither_rose": "Wither Rose Drops Copy",
+  "flowerbonemeal.option.wither_rose.tooltip": "Yes: bone meal on a wither rose drops a copy.\nNo: vanilla behaviour (bone meal does nothing to wither roses).",
   "modmenu.descriptionTranslation.flowerbonemeal": "Using bone meal on any flower drops a copy of that flower."
 }
