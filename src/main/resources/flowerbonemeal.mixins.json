@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.flowerbonemeal.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "BoneMealItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

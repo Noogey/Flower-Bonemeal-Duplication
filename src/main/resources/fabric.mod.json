@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "flowerbonemeal",
+  "version": "${version}",
+  "name": "Flower Bone Meal Duplication",
+  "description": "Using bone meal on any flower drops a copy of that flower. Settings in config/flowerbonemeal.json or through Mod Menu.",
+  "authors": [
+    "You"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "modmenu": [
+      "com.flowerbonemeal.client.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "flowerbonemeal.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "~26.2",
+    "java": ">=25"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}
