@@ -16,24 +16,24 @@ flower stays in place. Fabric API is **not** required.
 
 ## Settings
 
-Three flowers already do something with bone meal in vanilla, so each has a toggle.
-`true` = drop a copy, `false` = vanilla behaviour.
-
-| Option | Default | When `false` (vanilla) |
+| Setting | Default | What it does |
 |---|---|---|
-| Flowering Azalea Drops Copy | `true` | grows an azalea tree |
-| Mangrove Propagule Drops Copy | `false` | grows the propagule a stage |
-| Pink Petals & Wildflowers Drop Copy | `true` | adds a petal / spreads |
+| Mod Enabled | Yes | **No** switches the whole mod off, and bone meal works exactly like vanilla |
+| Flowering Azalea Drops Copy | Yes | **No** = vanilla (grows an azalea tree) |
+| Mangrove Propagule Drops Copy | No | **No** = vanilla (grows the propagule a stage) |
+| Pink Petals & Wildflowers Drop Copy | Yes | **No** = vanilla (adds a petal / spreads) |
 
-**With [Mod Menu](https://modrinth.com/mod/modmenu)** (optional): Mods → Flower Bone Meal
-Duplication → Configure. Click an option to flip it; hover for a description. Changes apply
-immediately.
+**With [Mod Menu](https://modrinth.com/mod/modmenu)** (optional): go to Mods → Flower Bone Meal
+Duplication → Configure. Each setting has its name on the left and a Yes/No button on the right.
+Click to flip it, and hover for a description. While Mod Enabled is No, the other three are greyed
+out. Changes apply immediately.
 
 **Without Mod Menu** (or on a dedicated server), edit `.minecraft/config/flowerbonemeal.json`
 (created on first launch), then restart:
 
 ```json
 {
+  "modEnabled": true,
   "floweringAzaleaDropsCopy": true,
   "mangrovePropaguleDropsCopy": false,
   "pinkPetalsAndWildflowersDropCopy": true
@@ -69,7 +69,7 @@ Requires **JDK 25**.
 ./gradlew build          # Windows: gradlew.bat build
 ```
 
-The jar is written to `build/libs/flower-bonemeal-duplication-3.0.0.jar` (ignore any `-sources`
+The jar is written to `build/libs/flower-bonemeal-duplication-3.1.0.jar` (ignore any `-sources`
 jar). Put it in `.minecraft/mods` with Fabric Loader 0.19.5+. Mod Menu is optional.
 
 No JDK? Push this folder to a GitHub repository. The included workflow

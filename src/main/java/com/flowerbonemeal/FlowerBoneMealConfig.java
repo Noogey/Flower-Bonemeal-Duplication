@@ -11,11 +11,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * The three toggles, stored in .minecraft/config/flowerbonemeal.json.
+ * The mod's settings, stored in .minecraft/config/flowerbonemeal.json.
  * true  = bone meal makes the flower drop a copy of itself
  * false = bone meal does what it does in vanilla
  */
 public final class FlowerBoneMealConfig {
+
+    /** Master switch. false = the whole mod is off and bone meal works exactly like vanilla. */
+    public boolean modEnabled = true;
 
     /** Flowering azalea (and modded flowers that grow into a tree when bone-mealed). */
     public boolean floweringAzaleaDropsCopy = true;

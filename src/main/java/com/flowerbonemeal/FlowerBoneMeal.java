@@ -51,8 +51,9 @@ public final class FlowerBoneMeal {
 
     /** True if bone meal on this flower should drop a copy, false if vanilla behaviour should run. */
     public static boolean shouldDropCopy(BlockState state) {
-        if (!state.is(DUPLICATES_WITH_BONE_MEAL) || state.is(KEEPS_VANILLA_BONE_MEAL)) return false;
         FlowerBoneMealConfig config = FlowerBoneMealConfig.get();
+        if (!config.modEnabled) return false; // mod switched off: vanilla behaviour everywhere
+        if (!state.is(DUPLICATES_WITH_BONE_MEAL) || state.is(KEEPS_VANILLA_BONE_MEAL)) return false;
         return switch (groupOf(state)) {
             case FLOWERING_AZALEA -> config.floweringAzaleaDropsCopy;
             case MANGROVE_PROPAGULE -> config.mangrovePropaguleDropsCopy;

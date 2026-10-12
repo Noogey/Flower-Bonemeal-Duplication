@@ -1,16 +1,14 @@
 {
   "flowerbonemeal.config.title": "Flower Bone Meal Duplication",
-  "flowerbonemeal.option.true": "True",
-  "flowerbonemeal.option.false": "False",
-
+  "flowerbonemeal.option.yes": "Yes",
+  "flowerbonemeal.option.no": "No",
+  "flowerbonemeal.option.mod_enabled": "Mod Enabled",
+  "flowerbonemeal.option.mod_enabled.tooltip": "Yes: bone meal makes flowers drop a copy of themselves.\nNo: the mod is switched off and bone meal works exactly like vanilla.",
   "flowerbonemeal.option.flowering_azalea": "Flowering Azalea Drops Copy",
-  "flowerbonemeal.option.flowering_azalea.tooltip": "True: bone meal on flowering azalea drops a copy.\nFalse: vanilla behaviour (grows an azalea tree).\nAlso applies to modded flowers that grow into trees.",
-
+  "flowerbonemeal.option.flowering_azalea.tooltip": "Yes: bone meal on flowering azalea drops a copy.\nNo: vanilla behaviour (grows an azalea tree).\nAlso applies to modded flowers that grow into trees.",
   "flowerbonemeal.option.mangrove_propagule": "Mangrove Propagule Drops Copy",
-  "flowerbonemeal.option.mangrove_propagule.tooltip": "True: bone meal on a mangrove propagule drops a copy.\nFalse: vanilla behaviour (grows it a stage).\nAlso applies to modded flowers that grow in stages like it.",
-
+  "flowerbonemeal.option.mangrove_propagule.tooltip": "Yes: bone meal on a mangrove propagule drops a copy.\nNo: vanilla behaviour (grows it a stage).\nAlso applies to modded flowers that grow in stages like it.",
   "flowerbonemeal.option.pink_petals_wildflowers": "Pink Petals & Wildflowers Drop Copy",
-  "flowerbonemeal.option.pink_petals_wildflowers.tooltip": "True: bone meal on pink petals or wildflowers drops a copy.\nFalse: vanilla behaviour (adds a petal or spreads).\nAlso applies to modded petal flowers like them.",
-
+  "flowerbonemeal.option.pink_petals_wildflowers.tooltip": "Yes: bone meal on pink petals or wildflowers drops a copy.\nNo: vanilla behaviour (adds a petal or spreads).\nAlso applies to modded petal flowers like them.",
   "modmenu.descriptionTranslation.flowerbonemeal": "Using bone meal on any flower drops a copy of that flower."
 }
