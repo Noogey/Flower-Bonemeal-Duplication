@@ -106,4 +106,4 @@ No JDK? Push this folder to a GitHub repository. The included workflow
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](https://github.com/Noogey/Flower-Bonemeal-Duplication/blob/main/LICENSE).
