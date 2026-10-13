@@ -13,7 +13,7 @@
   "flowerbonemeal.option.azalea.neither": "Neither",
   "flowerbonemeal.option.torchflower_pitcher": "Torchflower & Pitcher Plant Drop Copy",
   "flowerbonemeal.option.torchflower_pitcher.tooltip": "Yes: bone meal on a torchflower or pitcher plant drops a copy.\nNo: vanilla behaviour (bone meal does nothing to them).",
-  "flowerbonemeal.option.wither_golden": "Wither Rose & Golden Dandelion",
+  "flowerbonemeal.option.wither_golden": "Wither Rose & Golden Dandelion Drop Copy",
   "flowerbonemeal.option.wither_golden.tooltip": "Wither Rose Only: only wither roses drop a copy.\nGolden Dandelion Only: only golden dandelions drop a copy.\nBoth: both drop a copy.\nOff: neither does (vanilla).",
   "flowerbonemeal.option.wither_golden.wither_rose_only": "Wither Rose Only",
   "flowerbonemeal.option.wither_golden.golden_dandelion_only": "Golden Dandelion Only",

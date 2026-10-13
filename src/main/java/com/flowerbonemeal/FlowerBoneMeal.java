@@ -86,6 +86,18 @@ public final class FlowerBoneMeal {
         };
     }
 
+    /**
+     * True if the green bone meal particles should be hidden for this block: the mangrove
+     * propagule and both azaleas, but only while their setting makes them drop a copy.
+     */
+    public static boolean hidesGrowthParticles(BlockState state) {
+        if (!shouldDropCopy(state)) return false;
+        Group group = groupOf(state);
+        return group == Group.MANGROVE_PROPAGULE
+                || group == Group.FLOWERING_AZALEA
+                || group == Group.REGULAR_AZALEA;
+    }
+
     private static TagKey<Block> tag(String path) {
         return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MOD_ID, path));
     }

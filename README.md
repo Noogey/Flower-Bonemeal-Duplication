@@ -26,16 +26,19 @@ torchflower, pitcher plant, wither rose, golden dandelion.
 | Mangrove Propagule Drops Copy | Yes / No | No |
 | Azalea Duplication | Flowering Only / Flowering and Regular / Neither | Flowering Only |
 | Torchflower & Pitcher Plant Drop Copy | Yes / No | Yes |
-| Wither Rose & Golden Dandelion | Wither Rose Only / Golden Dandelion Only / Both / Off | Both |
+| Wither Rose & Golden Dandelion Drop Copy | Wither Rose Only / Golden Dandelion Only / Both / Off | Both |
 
 - **Mod Enabled: No** switches the whole mod off, and bone meal works exactly like vanilla.
 - **Mangrove Propagule: No** means vanilla behaviour (it grows toward a tree).
+- **No green particles:** when a mangrove propagule or azalea drops a copy, the green growth
+  particles are hidden, since nothing grew. The bone meal sound still plays. This applies to
+  whichever of them are set to drop a copy.
 - **Azalea:**
   - *Flowering Only*: flowering azalea drops a copy, and regular azalea grows a tree.
   - *Flowering and Regular*: both drop a copy, and neither grows a tree from bone meal.
   - *Neither*: both grow an azalea tree (vanilla).
 - **Torchflower & Pitcher Plant: No** means bone meal does nothing to them (vanilla).
-- **Wither Rose & Golden Dandelion:** chooses which of the two drop a copy. *Off* means neither
+- **Wither Rose & Golden Dandelion Drop Copy:** chooses which of the two drop a copy. *Off* means neither
   does (vanilla).
 
 **With [Mod Menu](https://modrinth.com/mod/modmenu)** (optional): go to Mods → Flower Bone Meal
@@ -83,7 +86,7 @@ matching tag in `data/flowerbonemeal/tags/block/`:
 | `behaves_like_flowering_azalea` | Azalea, flowering side |
 | `behaves_like_azalea` | Azalea, regular side |
 | `torchflower_and_pitcher_plant` | Torchflower & Pitcher Plant |
-| `wither_rose` / `golden_dandelion` | Wither Rose & Golden Dandelion |
+| `wither_rose` / `golden_dandelion` | Wither Rose & Golden Dandelion Drop Copy |
 | `keeps_vanilla_bone_meal` | never touched by the mod |
 | `duplicates_with_bone_meal` | the full list of blocks the mod looks at |
 
@@ -95,7 +98,7 @@ Requires **JDK 25**.
 ./gradlew build          # Windows: gradlew.bat build
 ```
 
-The jar is written to `build/libs/flower-bonemeal-duplication-4.0.0.jar`. Put it in
+The jar is written to `build/libs/flower-bonemeal-duplication-4.1.1.jar`. Put it in
 `.minecraft/mods` with Fabric Loader 0.19.5+. Mod Menu is optional.
 
 No JDK? Push this folder to a GitHub repository. The included workflow
