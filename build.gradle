@@ -42,3 +42,10 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_25
 	targetCompatibility = JavaVersion.VERSION_25
 }
+
+// Bundle the license inside the mod jar too
+jar {
+	from("LICENSE") {
+		rename { "LICENSE_flowerbonemeal" }
+	}
+}

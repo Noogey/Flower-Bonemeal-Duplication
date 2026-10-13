@@ -5,8 +5,12 @@
   "name": "Flower Bone Meal Duplication",
   "description": "Bone meal makes flowers drop a copy of themselves, filling the gaps vanilla leaves. Settings in config/flowerbonemeal.json or through Mod Menu.",
   "authors": [
-    "You"
+    "Noogey"
   ],
+  "contact": {
+    "sources": "https://github.com/Noogey/Flower-Bonemeal-Duplication",
+    "issues": "https://github.com/Noogey/Flower-Bonemeal-Duplication/issues"
+  },
   "license": "MIT",
   "environment": "*",
   "entrypoints": {

@@ -98,8 +98,12 @@ Requires **JDK 25**.
 ./gradlew build          # Windows: gradlew.bat build
 ```
 
-The jar is written to `build/libs/flower-bonemeal-duplication-4.1.1.jar`. Put it in
+The jar is written to `build/libs/flower-bonemeal-duplication-4.1.2.jar`. Put it in
 `.minecraft/mods` with Fabric Loader 0.19.5+. Mod Menu is optional.
 
 No JDK? Push this folder to a GitHub repository. The included workflow
 (`.github/workflows/build.yml`) builds it, and the jar appears under the run's **Artifacts**.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
