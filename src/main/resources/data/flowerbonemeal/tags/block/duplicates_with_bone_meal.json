@@ -1,40 +1,47 @@
 {
   "replace": false,
   "values": [
-    { "id": "#minecraft:flowers", "required": false },
-
-    { "id": "minecraft:allium", "required": false },
-    { "id": "minecraft:azure_bluet", "required": false },
-    { "id": "minecraft:blue_orchid", "required": false },
-    { "id": "minecraft:cornflower", "required": false },
-    { "id": "minecraft:dandelion", "required": false },
-    { "id": "minecraft:closed_eyeblossom", "required": false },
-    { "id": "minecraft:open_eyeblossom", "required": false },
-    { "id": "minecraft:golden_dandelion", "required": false },
-    { "id": "minecraft:lily_of_the_valley", "required": false },
-    { "id": "minecraft:oxeye_daisy", "required": false },
-    { "id": "minecraft:poppy", "required": false },
-    { "id": "minecraft:torchflower", "required": false },
-    { "id": "minecraft:orange_tulip", "required": false },
-    { "id": "minecraft:pink_tulip", "required": false },
-    { "id": "minecraft:red_tulip", "required": false },
-    { "id": "minecraft:white_tulip", "required": false },
-    { "id": "minecraft:wither_rose", "required": false },
-
-    { "id": "minecraft:lilac", "required": false },
-    { "id": "minecraft:peony", "required": false },
-    { "id": "minecraft:pitcher_plant", "required": false },
-    { "id": "minecraft:rose_bush", "required": false },
-    { "id": "minecraft:sunflower", "required": false },
-
-    { "id": "minecraft:cherry_leaves", "required": false },
-    { "id": "minecraft:chorus_flower", "required": false },
-    { "id": "minecraft:flowering_azalea", "required": false },
-    { "id": "minecraft:flowering_azalea_leaves", "required": false },
-    { "id": "minecraft:mangrove_propagule", "required": false },
-    { "id": "minecraft:pink_petals", "required": false },
-    { "id": "minecraft:spore_blossom", "required": false },
-    { "id": "minecraft:wildflowers", "required": false },
-    { "id": "minecraft:cactus_flower", "required": false }
+    {
+      "id": "#minecraft:flowers",
+      "required": false
+    },
+    "minecraft:allium",
+    "minecraft:azure_bluet",
+    "minecraft:blue_orchid",
+    "minecraft:cornflower",
+    "minecraft:dandelion",
+    {
+      "id": "minecraft:closed_eyeblossom",
+      "required": false
+    },
+    {
+      "id": "minecraft:open_eyeblossom",
+      "required": false
+    },
+    {
+      "id": "minecraft:golden_dandelion",
+      "required": false
+    },
+    "minecraft:lily_of_the_valley",
+    "minecraft:oxeye_daisy",
+    "minecraft:poppy",
+    "minecraft:torchflower",
+    "minecraft:orange_tulip",
+    "minecraft:pink_tulip",
+    "minecraft:red_tulip",
+    "minecraft:white_tulip",
+    "minecraft:wither_rose",
+    "minecraft:pitcher_plant",
+    "minecraft:cherry_leaves",
+    "minecraft:chorus_flower",
+    "minecraft:flowering_azalea",
+    "minecraft:flowering_azalea_leaves",
+    "minecraft:azalea",
+    "minecraft:mangrove_propagule",
+    "minecraft:spore_blossom",
+    {
+      "id": "minecraft:cactus_flower",
+      "required": false
+    }
   ]
 }

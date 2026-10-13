@@ -1,6 +1,8 @@
 package com.flowerbonemeal.client;
 
 import com.flowerbonemeal.FlowerBoneMealConfig;
+import com.flowerbonemeal.FlowerBoneMealConfig.AzaleaMode;
+import com.flowerbonemeal.FlowerBoneMealConfig.WitherGoldenMode;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
@@ -11,29 +13,28 @@ import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.Locale;
 import java.util.function.Supplier;
 
 /**
  * Settings screen opened from Mod Menu's "Configure" button.
- * Each row has its name on the left and a Yes/No button on the right.
- * The first row turns the whole mod on or off; while it is off, the other rows are greyed out.
+ * Each row has its name on the left and a button on the right; clicking the button moves to the
+ * next choice. While "Mod Enabled" is No, the other rows are greyed out.
  */
 public class FlowerBoneMealConfigScreen extends Screen {
 
     private static final int ROW_HEIGHT = 25;
-    private static final int TOGGLE_WIDTH = 100;
+    private static final int BUTTON_WIDTH = 140;
     private static final int TOP = 40;
-    private static final Component YES = Component.translatable("flowerbonemeal.option.yes").withStyle(ChatFormatting.GREEN);
-    private static final Component NO = Component.translatable("flowerbonemeal.option.no").withStyle(ChatFormatting.RED);
 
     /** One row on the screen: its label, where it sits, and its button. */
     private record Row(Component label, int y, Button button) {}
 
     private final Screen parent;
     private final List<Row> rows = new ArrayList<>();
-    private final List<Button> featureButtons = new ArrayList<>();
+    private final List<Button> settingButtons = new ArrayList<>();
     private int left;
+    private int buttonX;
 
     public FlowerBoneMealConfigScreen(Screen parent) {
         super(Component.translatable("flowerbonemeal.config.title"));
@@ -43,61 +44,81 @@ public class FlowerBoneMealConfigScreen extends Screen {
     @Override
     protected void init() {
         rows.clear();
-        featureButtons.clear();
+        settingButtons.clear();
         FlowerBoneMealConfig config = FlowerBoneMealConfig.get();
 
-        int panelWidth = Math.min(this.width - 40, 440);
+        int panelWidth = Math.min(this.width - 40, 460);
         this.left = (this.width - panelWidth) / 2;
-        int toggleX = this.left + panelWidth - TOGGLE_WIDTH;
+        this.buttonX = this.left + panelWidth - BUTTON_WIDTH;
 
-        // Row 1: master switch. Turning it off makes bone meal behave exactly like vanilla.
-        addRow("mod_enabled", toggleX, 0,
-                () -> config.modEnabled,
-                value -> {
-                    config.modEnabled = value;
-                    updateFeatureButtons();
-                },
-                false);
+        // Row 1: master switch.
+        addRow("mod_enabled", 0, false,
+                () -> yesNo(config.modEnabled),
+                () -> {
+                    config.modEnabled = !config.modEnabled;
+                    updateSettingButtons();
+                });
 
-        // Rows 2-5: the per-flower toggles.
-        addRow("flowering_azalea", toggleX, 1,
-                () -> config.floweringAzaleaDropsCopy, value -> config.floweringAzaleaDropsCopy = value, true);
-        addRow("mangrove_propagule", toggleX, 2,
-                () -> config.mangrovePropaguleDropsCopy, value -> config.mangrovePropaguleDropsCopy = value, true);
-        addRow("pink_petals_wildflowers", toggleX, 3,
-                () -> config.pinkPetalsAndWildflowersDropCopy, value -> config.pinkPetalsAndWildflowersDropCopy = value, true);
-        addRow("wither_rose", toggleX, 4,
-                () -> config.witherRoseDropsCopy, value -> config.witherRoseDropsCopy = value, true);
+        // Row 2: mangrove propagule (Yes/No).
+        addRow("mangrove_propagule", 1, true,
+                () -> yesNo(config.mangrovePropaguleDropsCopy),
+                () -> config.mangrovePropaguleDropsCopy = !config.mangrovePropaguleDropsCopy);
 
-        updateFeatureButtons();
+        // Row 3: azaleas (Flowering Only -> Flowering and Regular -> Neither).
+        addRow("azalea", 2, true,
+                () -> mode("azalea", config.azaleaMode.name(), config.azaleaMode != AzaleaMode.NEITHER),
+                () -> config.azaleaMode = config.azaleaMode.next());
+
+        // Row 4: torchflower and pitcher plant (Yes/No).
+        addRow("torchflower_pitcher", 3, true,
+                () -> yesNo(config.torchflowerAndPitcherPlantDropCopy),
+                () -> config.torchflowerAndPitcherPlantDropCopy = !config.torchflowerAndPitcherPlantDropCopy);
+
+        // Row 5: wither rose and golden dandelion (Wither Rose Only -> Golden Dandelion Only -> Both -> Off).
+        addRow("wither_golden", 4, true,
+                () -> mode("wither_golden", config.witherRoseAndGoldenDandelion.name(),
+                        config.witherRoseAndGoldenDandelion != WitherGoldenMode.OFF),
+                () -> config.witherRoseAndGoldenDandelion = config.witherRoseAndGoldenDandelion.next());
+
+        updateSettingButtons();
 
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, button -> this.onClose())
                 .pos(this.width / 2 - 100, this.height - 28).size(200, 20).build());
     }
 
-    private void addRow(String name, int toggleX, int index, Supplier<Boolean> getter,
-                        Consumer<Boolean> setter, boolean isFeature) {
+    private void addRow(String name, int index, boolean isSetting, Supplier<Component> text, Runnable onClick) {
         String key = "flowerbonemeal.option." + name;
         int y = TOP + index * ROW_HEIGHT;
 
-        Button button = Button.builder(getter.get() ? YES : NO, b -> {
-                    boolean newValue = !getter.get();
-                    setter.accept(newValue);
-                    b.setMessage(newValue ? YES : NO);
+        Button button = Button.builder(text.get(), b -> {
+                    onClick.run();
+                    b.setMessage(text.get());
                     FlowerBoneMealConfig.save(); // write config/flowerbonemeal.json immediately
                 })
-                .pos(toggleX, y).size(TOGGLE_WIDTH, 20).build();
+                .pos(this.buttonX, y).size(BUTTON_WIDTH, 20).build();
         button.setTooltip(Tooltip.create(Component.translatable(key + ".tooltip")));
 
         this.addRenderableWidget(button);
         rows.add(new Row(Component.translatable(key), y, button));
-        if (isFeature) featureButtons.add(button);
+        if (isSetting) settingButtons.add(button);
     }
 
-    /** Grey out the per-flower toggles while the whole mod is switched off. */
-    private void updateFeatureButtons() {
+    private static Component yesNo(boolean value) {
+        return value
+                ? Component.translatable("flowerbonemeal.option.yes").withStyle(ChatFormatting.GREEN)
+                : Component.translatable("flowerbonemeal.option.no").withStyle(ChatFormatting.RED);
+    }
+
+    /** Text for a multi-choice button, e.g. "flowerbonemeal.option.azalea.flowering_only". Green unless it's the "off" choice. */
+    private static Component mode(String setting, String enumName, boolean on) {
+        return Component.translatable("flowerbonemeal.option." + setting + "." + enumName.toLowerCase(Locale.ROOT))
+                .withStyle(on ? ChatFormatting.GREEN : ChatFormatting.RED);
+    }
+
+    /** Grey out the settings while the whole mod is switched off. */
+    private void updateSettingButtons() {
         boolean enabled = FlowerBoneMealConfig.get().modEnabled;
-        for (Button button : featureButtons) button.active = enabled;
+        for (Button button : settingButtons) button.active = enabled;
     }
 
     @Override

@@ -1,33 +1,47 @@
 # Flower Bone Meal Duplication (Fabric, Minecraft 26.2)
 
-Using bone meal on **any flower** makes it drop one copy of itself. This is the vanilla
-tall-flower behaviour ("applying bone meal to a double flower causes the flower to drop a copy
-of itself"), extended to every flower on the Minecraft Wiki's Flower page:
+Using bone meal on a flower makes it drop one copy of itself, for the flowers vanilla Java
+doesn't already handle. The flower stays in place, each use costs one bone meal, and it works
+by hand and from dispensers. Fabric API is **not** required.
 
-- **Small flowers (17):** allium, azure bluet, blue orchid, cornflower, dandelion, open/closed
-  eyeblossom, golden dandelion, lily of the valley, oxeye daisy, poppy, torchflower,
-  4 tulips, wither rose
-- **Tall flowers (5):** lilac, peony, rose bush, sunflower, **and pitcher plant**
-- **Other flowers (9):** cherry leaves, chorus flower, flowering azalea, flowering azalea
-  leaves, mangrove propagule, pink petals, spore blossom, wildflowers, cactus flower
+## Which flowers
 
-Works by hand and from dispensers. Each use costs one bone meal and drops one item; the
-flower stays in place. Fabric API is **not** required.
+**Always duplicate (while the mod is enabled):**
+- Small flowers: allium, azure bluet, blue orchid, cornflower, dandelion, open/closed eyeblossom,
+  lily of the valley, oxeye daisy, poppy, and the 4 tulips
+- Cherry leaves, chorus flower, flowering azalea leaves, spore blossom, cactus flower
+
+**Controlled by a setting** (see below): mangrove propagule, flowering azalea, regular azalea,
+torchflower, pitcher plant, wither rose, golden dandelion.
+
+**Left to vanilla**, since vanilla already does something useful with them:
+- Lilac, peony, rose bush, sunflower: vanilla already drops a copy
+- Pink petals, wildflowers: vanilla already grows a petal
 
 ## Settings
 
-| Setting | Default | What it does |
+| Setting | Choices | Default |
 |---|---|---|
-| Mod Enabled | Yes | **No** switches the whole mod off, and bone meal works exactly like vanilla |
-| Flowering Azalea Drops Copy | Yes | **No** = vanilla (grows an azalea tree) |
-| Mangrove Propagule Drops Copy | No | **No** = vanilla (grows the propagule a stage) |
-| Pink Petals & Wildflowers Drop Copy | No | **No** = vanilla (adds a petal / spreads) |
-| Wither Rose Drops Copy | Yes | **No** = vanilla (bone meal does nothing to wither roses) |
+| Mod Enabled | Yes / No | Yes |
+| Mangrove Propagule Drops Copy | Yes / No | No |
+| Azalea Duplication | Flowering Only / Flowering and Regular / Neither | Flowering Only |
+| Torchflower & Pitcher Plant Drop Copy | Yes / No | Yes |
+| Wither Rose & Golden Dandelion | Wither Rose Only / Golden Dandelion Only / Both / Off | Both |
+
+- **Mod Enabled: No** switches the whole mod off, and bone meal works exactly like vanilla.
+- **Mangrove Propagule: No** means vanilla behaviour (it grows toward a tree).
+- **Azalea:**
+  - *Flowering Only*: flowering azalea drops a copy, and regular azalea grows a tree.
+  - *Flowering and Regular*: both drop a copy, and neither grows a tree from bone meal.
+  - *Neither*: both grow an azalea tree (vanilla).
+- **Torchflower & Pitcher Plant: No** means bone meal does nothing to them (vanilla).
+- **Wither Rose & Golden Dandelion:** chooses which of the two drop a copy. *Off* means neither
+  does (vanilla).
 
 **With [Mod Menu](https://modrinth.com/mod/modmenu)** (optional): go to Mods → Flower Bone Meal
-Duplication → Configure. Each setting has its name on the left and a Yes/No button on the right.
-Click to flip it, and hover for a description. While Mod Enabled is No, the other settings are greyed
-out. Changes apply immediately.
+Duplication → Configure. Each setting has its name on the left and a button on the right.
+Clicking the button moves to the next choice, and hovering shows what each choice does. While
+Mod Enabled is No, the other settings are greyed out. Changes apply immediately.
 
 **Without Mod Menu** (or on a dedicated server), edit `.minecraft/config/flowerbonemeal.json`
 (created on first launch), then restart:
@@ -35,33 +49,43 @@ out. Changes apply immediately.
 ```json
 {
   "modEnabled": true,
-  "floweringAzaleaDropsCopy": true,
   "mangrovePropaguleDropsCopy": false,
-  "pinkPetalsAndWildflowersDropCopy": false,
-  "witherRoseDropsCopy": true
+  "azaleaMode": "FLOWERING_ONLY",
+  "torchflowerAndPitcherPlantDropCopy": true,
+  "witherRoseAndGoldenDandelion": "BOTH"
 }
 ```
+
+Valid values are `FLOWERING_ONLY` / `FLOWERING_AND_REGULAR` / `NEITHER` for `azaleaMode`, and
+`WITHER_ROSE_ONLY` / `GOLDEN_DANDELION_ONLY` / `BOTH` / `OFF` for
+`witherRoseAndGoldenDandelion`.
 
 On a multiplayer server, the **server's** config file decides what happens.
 
 ### Modded flowers
 
-Each toggle also covers modded flowers that behave the same way, detected automatically from
-the vanilla code they're built on:
+Flowers from other mods that are in the vanilla `#minecraft:flowers` tag are handled
+automatically, based on the vanilla code they're built on:
 
-- **Like mangrove propagule** (grows in stages): built on `MangrovePropaguleBlock`
-- **Like pink petals / wildflowers** (adds petals): built on `FlowerBedBlock`
-- **Like flowering azalea** (grows into a tree): built on `AzaleaBlock` or `SaplingBlock`
+- **Adds petals** like pink petals (`FlowerBedBlock`): left to vanilla
+- **Tall flower that already drops a copy** (bone-mealable `DoublePlantBlock`): left to vanilla
+- **Grows in stages** like a mangrove propagule (`MangrovePropaguleBlock`): Mangrove Propagule setting
+- **Grows into a tree** like flowering azalea (`AzaleaBlock` / `SaplingBlock`): treated as
+  flowering azalea in the Azalea setting
+- **Anything else:** always drops a copy
 
-A modded flower that does something similar with its own code can't be detected
-automatically. Add it to the matching tag with a datapack:
+To put a modded flower under a particular setting by hand, add it with a datapack to the
+matching tag in `data/flowerbonemeal/tags/block/`:
 
-- `data/flowerbonemeal/tags/block/behaves_like_flowering_azalea.json`
-- `data/flowerbonemeal/tags/block/behaves_like_mangrove_propagule.json`
-- `data/flowerbonemeal/tags/block/behaves_like_pink_petals.json`
-
-Modded flowers in the vanilla `#minecraft:flowers` tag duplicate automatically. Anything
-in neither group simply drops a copy.
+| Tag | Setting |
+|---|---|
+| `behaves_like_mangrove_propagule` | Mangrove Propagule |
+| `behaves_like_flowering_azalea` | Azalea, flowering side |
+| `behaves_like_azalea` | Azalea, regular side |
+| `torchflower_and_pitcher_plant` | Torchflower & Pitcher Plant |
+| `wither_rose` / `golden_dandelion` | Wither Rose & Golden Dandelion |
+| `keeps_vanilla_bone_meal` | never touched by the mod |
+| `duplicates_with_bone_meal` | the full list of blocks the mod looks at |
 
 ## Build
 
@@ -71,15 +95,8 @@ Requires **JDK 25**.
 ./gradlew build          # Windows: gradlew.bat build
 ```
 
-The jar is written to `build/libs/flower-bonemeal-duplication-3.2.0.jar` (ignore any `-sources`
-jar). Put it in `.minecraft/mods` with Fabric Loader 0.19.5+. Mod Menu is optional.
+The jar is written to `build/libs/flower-bonemeal-duplication-4.0.0.jar`. Put it in
+`.minecraft/mods` with Fabric Loader 0.19.5+. Mod Menu is optional.
 
 No JDK? Push this folder to a GitHub repository. The included workflow
 (`.github/workflows/build.yml`) builds it, and the jar appears under the run's **Artifacts**.
-
-## Other tags
-
-- `duplicates_with_bone_meal.json`: which blocks count as flowers. It includes
-  `#minecraft:flowers` plus each wiki flower by name.
-- `keeps_vanilla_bone_meal.json`: always use vanilla behaviour for these, regardless of the
-  toggles. It's empty by default.

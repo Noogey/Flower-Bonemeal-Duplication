@@ -1,4 +1,14 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    "minecraft:lilac",
+    "minecraft:peony",
+    "minecraft:rose_bush",
+    "minecraft:sunflower",
+    "minecraft:pink_petals",
+    {
+      "id": "minecraft:wildflowers",
+      "required": false
+    }
+  ]
 }
